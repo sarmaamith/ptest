@@ -17,9 +17,9 @@
   // ============================================================
   const SECURITI_ENDPOINT = 'https://app.securiti.ai/privaci/v1/consentapi/consent_upload';
   const SECURITI_HEADERS = {
-    'X-API-Key':    'YOUR_API_KEY',
-    'X-API-Secret': 'YOUR_API_SECRET',
-    'X-TIDENT':     'YOUR_TENANT_ID',
+    'X-API-Key': 'GYsPcqTmOKEXcXq7M15ElbXOsga80rk0W367rmk9',
+    'X-API-Secret': '85fzFjPye5XzO8yjXLsa9bP0Ol3zcPjl5Yd17bXM',
+    'X-TIDENT': '09f99b07-9b72-4dd3-b6b5-1009a96c2fd4',
     'Content-Type': 'application/json'
   };
   const FORM_SELECTOR = '#consentForm';
