@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consent Preference Form</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #1c2430;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    height: fit-content;
+  }
+  .card-header {
+    background: linear-gradient(120deg, #2f5fe0 0%, #5b9dfb 100%);
+    color: #fff;
+    padding: 32px 40px;
+  }
+  .card-header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .card-header p {
+    margin: 0;
+    font-size: 15px;
+    opacity: 0.92;
+  }
+  .card-body {
+    padding: 32px 40px 40px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1c2430;
+    margin-bottom: 8px;
+  }
+  .field label .req {
+    color: #e0473d;
+    margin-left: 2px;
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #dfe3ea;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #333;
+    background: #fafbfc;
+    outline: none;
+    font-family: inherit;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: #98a2ae; }
+  .field input:focus,
+  .field textarea:focus { border-color: #2f5fe0; background: #fff; }
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  .consent-section {
+    background: #f5f7fa;
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .consent-section h2 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    color: #2f5fe0;
+    font-weight: 700;
+  }
+  .consent-section .consent-desc {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: #5a6472;
+  }
+  .consent-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .consent-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #dfe3ea;
+    border-radius: 10px;
+    padding: 14px 20px;
+    flex: 1 1 180px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #1c2430;
+    font-weight: 600;
+  }
+  .consent-option input {
+    width: 18px;
+    height: 18px;
+    accent-color: #2f5fe0;
+    flex-shrink: 0;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .btn-submit {
+    background: #2f5fe0;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-submit:hover { background: #2650c2; }
+  .btn-submit:disabled { background: #a9bdee; cursor: not-allowed; }
+  .btn-clear {
+    background: #eceff3;
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-clear:hover { background: #dfe3ea; }
+
+  .status-msg {
+    font-size: 13px;
+    min-height: 16px;
+  }
+  .status-msg.error { color: #c0392b; }
+  .status-msg.success { color: #1e8449; }
+
+  .form-footnote {
+    font-size: 13px;
+    color: #6b7480;
+    line-height: 1.5;
+    margin: 4px 0 0;
+  }
+  .manage-link {
+    color: #2f5fe0;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+    <h1>Consent Preference Form</h1>
+    <p>Share your details and tell us exactly how we may use them. You can choose each purpose separately.</p>
+  </div>
+
+  <div class="card-body">
+    <form id="consentForm" novalidate>
+      <div class="field-grid">
+        <div class="field">
+          <label for="fullName">Full name<span class="req">*</span></label>
+          <input type="text" id="fullName" placeholder="Jane Doe" required>
+        </div>
+        <div class="field">
+          <label for="age">Age<span class="req">*</span></label>
+          <input type="number" id="age" min="0" max="120" placeholder="30" required>
+        </div>
+        <div class="field">
+          <label for="email">Email<span class="req">*</span></label>
+          <input type="email" id="email" placeholder="jane@example.com" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone number<span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="address">Address<span class="req">*</span></label>
+        <textarea id="address" placeholder="Flat / Street / City / State / PIN" required></textarea>
+      </div>
+
+      <div class="consent-section">
+        <h2>1. Marketing communication</h2>
+        <p class="consent-desc">Tick the channels on which you agree to receive marketing messages.</p>
+        <div class="consent-options">
+          <label class="consent-option">
+            <input type="checkbox" id="consentCall">
+            <span>Call</span>
+          </label>
+          <label class="consent-option">
+            <input type="checkbox" id="consentSMS">
+            <span>SMS</span>
+          </label>
+          <label class="consent-option">
+            <input type="checkbox" id="consentEmailMarketing">
+            <span>Email</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-section">
+        <h2>2. Data sharing with third parties</h2>
+        <p class="consent-desc">Tick the purposes for which you allow your data to be shared.</p>
+        <div class="consent-options">
+          <label class="consent-option">
+            <input type="checkbox" id="consentSell">
+            <span>Sell</span>
+          </label>
+          <label class="consent-option">
+            <input type="checkbox" id="consentAiTraining">
+            <span>AI training</span>
+          </label>
+          <label class="consent-option">
+            <input type="checkbox" id="consentShareVendor">
+            <span>Share to vendor</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-submit" id="submitBtn">Submit consent</button>
+        <button type="reset" class="btn-clear" id="clearBtn">Clear</button>
+      </div>
+
+      <div class="status-msg" id="statusMsg"></div>
+
+      <p class="form-footnote">
+        Unticked boxes are recorded as an explicit &ldquo;No&rdquo;. Your choices are stored with a timestamp and can be changed at any time.
+      </p>
+      <a href="#" class="manage-link">Manage your preferences</a>
+    </form>
+  </div>
+</div>
+
+<!-- Consent-capture logic lives in its own file — see consent-preference-consent.js -->
+<script src="consent-preference-consent.js"></script>
+</body>
+</html>
